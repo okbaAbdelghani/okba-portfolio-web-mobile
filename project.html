@@ -8,87 +8,374 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"/>
 
 <style>
-  :root {
-    --bg-main: #0a0a12;
-    --bg-surface: rgba(20, 20, 35, 0.65);
-    --primary: #00ffc8;
-    --text-primary: #f3f4f6;
-    --text-secondary: #9ca3af;
-    --card-border: rgba(255, 255, 255, 0.06);
-    --font-stack: 'Plus Jakarta Sans', sans-serif;
-  }
+    /* ==========================================================================
+    project.html — Page-Specific Internal <style> Block
+    Scope: Detail page layout, video, gallery, app sections, lightbox
+    Prerequisite: style.css (global) must be linked before this block
+    ========================================================================== */
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* ===== PAGE BODY OVERRIDE (project detail layout) ===== */
   body {
-    font-family: var(--font-stack); background: var(--bg-main); color: var(--text-primary);
-    padding: 60px 8%; max-width: 1000px; margin: auto; line-height: 1.6;
+    padding: calc(var(--nav-height) + 52px) 8% 80px;
+    max-width: 1040px;
+    margin: 0 auto;
   }
 
-  .back-link {
-    display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary);
-    text-decoration: none; font-weight: 600; margin-bottom: 40px; transition: color 0.3s;
-  }
-  .back-link:hover { color: var(--primary); }
-
-  h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; color: #fff; }
-  .desc-block { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 32px; text-align: left; }
-
-  .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
-  .tech-tags span {
-    background: rgba(0, 255, 200, 0.06); color: var(--primary); border: 1px solid rgba(0, 255, 200, 0.15);
-    border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600;
+  /* ===== PAGE HEADER ===== */
+  header {
+    min-height: auto;
+    padding: 0;
+    display: block;
+    text-align: left;
+    align-items: unset;
+    justify-content: unset;
+    margin-bottom: 52px;
   }
 
-  .media-header { font-size: 1.4rem; font-weight: 700; margin-bottom: 20px; color: #fff; text-align: left; }
+  header h1 {
+    font-size: clamp(2rem, 4.5vw, 2.9rem);
+    font-weight: 800;
+    letter-spacing: -1.8px;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    color: var(--text-primary);
+    background: none;
+    -webkit-text-fill-color: var(--text-primary);
+  }
 
-  /* ===== VIDEO PIPELINE ===== */
+  .desc-block {
+    font-size: 1.08rem;
+    color: var(--text-secondary);
+    line-height: 1.78;
+    margin-bottom: 28px;
+    max-width: 700px;
+    white-space: pre-line;
+  }
+
+  /* Tech tags on detail page */
+  header .tech-tags {
+    margin-bottom: 0;
+  }
+
+  header .tech-tags span {
+    background: var(--primary-dim);
+    color: var(--primary);
+    border: 1px solid rgba(0, 255, 200, 0.18);
+    border-radius: var(--radius-sm);
+    padding: 5px 13px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+    transition: background var(--t-fast) ease, border-color var(--t-fast) ease;
+  }
+
+  header .tech-tags span:hover {
+    background: rgba(0, 255, 200, 0.18);
+    border-color: rgba(0, 255, 200, 0.32);
+  }
+
+  /* ===== MEDIA SECTION HEADERS ===== */
+  .media-header {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 18px;
+    margin-top: 40px;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .media-header::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background: var(--primary);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ===== VIDEO CONTAINER ===== */
   .video-container {
-    position: relative; width: 100%; padding-bottom: 56.25%; height: 0;
-    margin-bottom: 32px; background: #141423; border-radius: 16px; overflow: hidden;
-    border: 1px solid var(--card-border);
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    margin-bottom: 28px;
+    background: #0c0c1e;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-card);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   }
-  .video-container iframe { position: absolute; top:0; left:0; width:100%; height:100%; }
 
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Portrait/phone screen video variant */
   .video-container.portrait {
-    width: 280px; height: 500px; padding-bottom: 0; margin: 40px auto;
-    border: 8px solid rgba(255,255,255,0.1); border-radius: 32px;
+    width: 260px;
+    height: 480px;
+    padding-bottom: 0;
+    margin: 36px auto;
+    border: 7px solid rgba(255, 255, 255, 0.08);
+    border-radius: 32px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.04);
   }
 
-  /* ===== IMAGE GALLERY SYSTEM ===== */
-  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  /* ===== IMAGE GALLERY ===== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
   .gallery-grid img {
-    width: 100%; height: 160px; object-fit: cover; border-radius: 12px; cursor: pointer;
-    border: 1px solid var(--card-border); transition: all 0.3s ease; opacity: 0.85;
+    width: 100%;
+    height: 148px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    border: 1px solid var(--border-subtle);
+    opacity: 0.80;
+    transition:
+      transform var(--t-base) var(--ease-spring),
+      opacity var(--t-fast) ease,
+      border-color var(--t-fast) ease,
+      box-shadow var(--t-base) ease;
   }
-  .gallery-grid img:hover { transform: scale(1.03); opacity: 1; border-color: var(--primary); }
 
+  .gallery-grid img:hover {
+    transform: scale(1.04);
+    opacity: 1;
+    border-color: rgba(0, 255, 200, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Show more toggle button */
   .show-more-btn {
-    background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--card-border);
-    padding: 12px 28px; border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
-    transition: all 0.3s; margin: 20px auto; display: block;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-card);
+    padding: 11px 28px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font-family: var(--font-stack);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.2px;
+    transition: all var(--t-base) var(--ease-spring);
+    margin: 16px auto 0;
+    display: block;
   }
-  .show-more-btn:hover { background: #fff; color: var(--bg-main); }
 
-  /* ===== LIGHTBOX ENGINE ===== */
+  .show-more-btn:hover {
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--bg-main);
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(255, 255, 255, 0.10);
+  }
+
+  /* ===== APP SECTIONS (multi-app projects) ===== */
+  .app-section {
+    margin-top: 56px;
+    padding-top: 44px;
+    border-top: 1px solid var(--border-subtle);
+    text-align: left;
+  }
+
+  .app-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+
+  .app-title-wrapper h3 {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  .app-section > p {
+    color: var(--text-secondary);
+    font-size: 0.97rem;
+    line-height: 1.72;
+    margin-bottom: 24px;
+    max-width: 700px;
+  }
+
+  /* Sub-app visit button */
+  .btn-sub-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: linear-gradient(100deg, var(--primary), #00d4a8);
+    color: var(--bg-main);
+    padding: 9px 20px;
+    font-family: var(--font-stack);
+    font-size: 0.83rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 14px rgba(0, 255, 200, 0.16);
+    white-space: nowrap;
+    letter-spacing: 0.1px;
+    transition:
+      transform var(--t-base) var(--ease-spring),
+      box-shadow var(--t-base) ease,
+      opacity var(--t-fast) ease;
+    flex-shrink: 0;
+  }
+
+  .btn-sub-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0, 255, 200, 0.30);
+    opacity: 0.92;
+  }
+
+  /* ===== LIGHTBOX ===== */
   #lightbox {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5,5,10,0.98);
-    display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden;
-    transition: all 0.3s ease; z-index: 2000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(4, 4, 10, 0.97);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.28s ease, visibility 0.28s ease;
+    z-index: 2000;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
-  #lightbox.active { opacity: 1; visibility: visible; }
-  #lightbox img { max-width: 85%; max-height: 75%; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-  .lightbox-close { position: absolute; top: 30px; right: 40px; font-size: 2.5rem; color: var(--text-secondary); cursor: pointer; }
-  .lightbox-close:hover { color: #fff; }
-  .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2.5rem; color: var(--text-secondary); cursor: pointer; user-select: none; padding: 20px; }
-  .lightbox-nav:hover { color: var(--primary); }
-  .lightbox-nav.prev { left: 40px; }
-  .lightbox-nav.next { right: 40px; }
 
-  .app-section { margin-top: 60px; border-top: 1px solid var(--card-border); padding-top: 40px; text-align: left;}
-  .app-section h3 { font-size: 1.6rem; color: #fff; margin-bottom: 12px; }
-  .app-section p { color: var(--text-secondary); margin-bottom: 24px; }
+  #lightbox.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #lightbox img {
+    max-width: 88%;
+    max-height: 78vh;
+    border-radius: var(--radius-md);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+    transition: transform 0.22s var(--ease-spring);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color var(--t-fast) ease, transform var(--t-fast) ease;
+    padding: 8px;
+    user-select: none;
+  }
+
+  .lightbox-close:hover {
+    color: var(--text-primary);
+    transform: scale(1.1);
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--text-muted);
+    cursor: pointer;
+    user-select: none;
+    padding: 16px 20px;
+    transition: color var(--t-fast) ease, transform var(--t-base) var(--ease-spring);
+  }
+
+  .lightbox-nav:hover {
+    color: var(--primary);
+  }
+
+  .lightbox-nav.prev {
+    left: 24px;
+  }
+
+  .lightbox-nav.prev:hover {
+    transform: translateY(-50%) translateX(-2px);
+  }
+
+  .lightbox-nav.next {
+    right: 24px;
+  }
+
+  .lightbox-nav.next:hover {
+    transform: translateY(-50%) translateX(2px);
+  }
+
+  /* ===== RESPONSIVE: PROJECT DETAIL PAGE ===== */
+  @media (max-width: 1024px) {
+    body {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding: calc(var(--nav-height) + 36px) 22px 60px;
+    }
+
+    .video-container.portrait {
+      width: 220px;
+      height: 400px;
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .gallery-grid img { height: 120px; }
+
+    .app-title-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .app-title-wrapper h3 { font-size: 1.25rem; }
+
+    .lightbox-nav.prev { left: 8px; }
+    .lightbox-nav.next { right: 8px; }
+  }
+
+  @media (max-width: 480px) {
+    .desc-block { font-size: 0.97rem; }
+    .app-section { margin-top: 40px; padding-top: 32px; }
+    .btn-sub-link { width: 100%; justify-content: center; }
+  }
+
 </style>
 </head>
 <body>
@@ -150,7 +437,7 @@
         singleContainer.insertAdjacentHTML('beforeend', '<h4 class="media-header">Video Demonstration</h4>');
         project.videos.forEach(url => {
           const div = document.createElement("div");
-          div.className = url.includes("portrait") ? "video-container portrait" : "video-container";
+          div.className = url.includes("portrait") || url.includes("rsu_app") ? "video-container portrait" : "video-container";
           div.innerHTML = `<iframe src="${url}" frameborder="0" allowfullscreen></iframe>`;
           singleContainer.appendChild(div);
         });
@@ -198,12 +485,29 @@
       project.apps.forEach(app => {
         const appSection = document.createElement("div");
         appSection.className = "app-section";
-        appSection.innerHTML = `<h3>${app.name}</h3><p>${app.description}</p>`;
+
+        // Determine button context: Detect Google Play vs general active website link
+        const hasSubLink = app.link && app.link !== "#";
+        const isPlayStore = hasSubLink && app.link.includes("play.google.com");
+        const btnText = isPlayStore ? 'View on Google Play' : 'Visit Website';
+        const btnIcon = isPlayStore ? '<i class="fab fa-google-play"></i>' : '<i class="fas fa-external-link-alt"></i>';
+
+        appSection.innerHTML = `
+          <div class="app-title-wrapper">
+            <h3>${app.name}</h3>
+            ${hasSubLink ? `
+              <a href="${app.link}" target="_blank" rel="noopener noreferrer" class="btn-sub-link">
+                ${btnIcon} ${btnText}
+              </a>
+            ` : ''}
+          </div>
+          <p>${app.description}</p>
+        `;
 
         if (app.videos && app.videos.length > 0) {
           app.videos.forEach(url => {
             const div = document.createElement("div");
-            div.className = url.includes("portrait") ? "video-container portrait" : "video-container";
+            div.className = url.includes("portrait") || url.includes("rsu_app") ? "video-container portrait" : "video-container";
             div.innerHTML = `<iframe src="${url}" frameborder="0" allowfullscreen></iframe>`;
             appSection.appendChild(div);
           });

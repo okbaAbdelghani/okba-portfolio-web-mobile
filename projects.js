@@ -141,6 +141,103 @@ window.projectsData = [
     category: "web"
   },
   {
+    id: "city-coffee-house",
+    title: "City Coffee House Web Ecosystem",
+    description: "A premium hospitality digital platform engineered with WordPress and Divi, featuring a smart, zero-latency online ordering engine.",
+    fullDescription: `
+      An elegant, consumer-facing digital web platform built for City Coffee House to optimize their direct-to-consumer digital sales pipeline. The frontend architecture leverages a highly tailored WordPress and Divi design matrix, optimized for lightning-fast asset rendering, responsive typography, and consistent visual branding.
+
+      The core operational achievement of this project is the seamless integration of a smart, asynchronous online ordering system. The menu engine is custom-configured to process incoming customer transactions, manage real-time inventory states, and route delivery or pickup parameters with high efficiency, bypassing third-party aggregator marketplace commissions.
+    `,
+    images: ["assets/citycoffee_hero.jpeg", "assets/citycoffee_story.png", "assets/citycoffee_accessibi.png", "assets/citycoffee_home.png"],
+    link: "https://citycoffeehouseofficial.com/",
+    tech: [
+      "WordPress",
+      "Divi Builder",
+      "Smart Online Ordering API",
+      "eCommerce Architecture",
+      "PHP Customization",
+      "UI/UX Design Optimization"
+    ],
+    type: "single-app",
+    category: "web"
+  },
+  {
+    id: "branded-android-apps",
+    title: "Branded Enterprise Mobile Fleet",
+    description: "Architected, launched, and maintained over 120 native Android applications deployed for restaurant chains across the United States and Canada.",
+    fullDescription: `
+      An enterprise-scale mobile engineering milestone managing the end-to-end lifecycle of a vast multi-tenant white-label product fleet. This production ecosystem streamlines digital commerce, asynchronous online order injection, and programmatic customer retention algorithms for over 120 hospitality brands across North America.
+
+      Responsibilities spanned implementing robust native presentation layers using XML and Jetpack Compose under MVVM architectures, optimizing offline data persistence via Room/SQLite local databases, and orchestrating massive multi-app Google Play Console release management pipelines. Core achievements include navigating strict Google Play policy compliance matrices and building high-performance REST API integrations via Retrofit to process millions of transaction events safely.
+    `,
+    images: ["assets/branded_app_1.png"],
+    videos: ["https://www.youtube.com/embed/xNvBXiPDw1g?si=mUnhkoyc9KXhZdLN"],
+    link: "#", // Root is an overview, nested applications leverage direct links
+    tech: [
+      "Kotlin",
+      "MVVM",
+      "Jetpack Compose / XML",
+      "Room & SQLite",
+      "Retrofit API Handling",
+      "Google Play Console Automation",
+      "Multi-Tenant Architecture",
+      "North American Markets"
+    ],
+    type: "multi-app",
+    category: "mobile",
+    apps: [
+      {
+        name: "White-Label Application Architecture",
+        description: "The core native structural foundation empowering restaurant customers to execute low-latency mobile transactions, sync real-time menus, and calculate dynamic loyalty programmatic yields.",
+        images: ["assets/branded_app_1.png"],
+        videos: ["https://www.youtube.com/embed/xNvBXiPDw1g?si=mUnhkoyc9KXhZdLN"],
+        category: "mobile",
+        link: "#"
+      },
+      {
+        name: "Bahia Bowls Mobile",
+        description: "Custom native Android implementation built for the Bahia Bowls Acai Café franchise network. Features complex conditional component building allowing users to programmatically build and customize healthy ingredient configurations.",
+        images: [  
+          "assets/bahia_1.webp",
+          "assets/bahia_2.webp",
+          "assets/bahia_3.webp",
+          "assets/bahia_4.webp"
+        ],
+        videos: [],
+        category: "mobile",
+        link: "https://play.google.com/store/apps/details?id=com.soo.bahiabowls&pcampaignid=web_share"
+      },
+      {
+        name: "Goldbergs Fine Foods Mobile",
+        description: "High-throughput mobile application tailored for Goldbergs Fine Foods. Extensively optimized to handle heavy asynchronous layout rendering across both modern tablet registers and consumer mobile screen form-factors.",
+        images: [
+          "assets/goldbergs_1.webp",
+          "assets/goldbergs_2.webp",
+          "assets/goldbergs_3.webp",
+          "assets/goldbergs_4.webp",
+          "assets/goldbergs_5.webp"
+        ],
+        videos: [],
+        category: "mobile",
+        link: "https://play.google.com/store/apps/details?id=com.soo.goldbergsfine&pcampaignid=web_share"
+      },
+      {
+        name: "Java Junkies Mobile",
+        description: "A conversion-centric native app engine engineered for the Java Junkies café chain, emphasizing sub-second ordering flows and push-notification hooks to optimize consumer engagement curves.",
+        images: [
+          "assets/javajunkies_1.webp",
+          "assets/javajunkies_2.webp",
+          "assets/javajunkies_3.webp",
+          "assets/javajunkies_4.webp"
+        ],
+        videos: [],
+        category: "mobile",
+        link: "https://play.google.com/store/apps/details?id=com.soo.java&pcampaignid=web_share"
+      }
+    ]
+  },
+  {
     id: "rsu-simulator-app",
     title: "RSU Social Eligibility Simulator",
     description: "A native, offline-first Android application mapping Morocco's RSU social scoring matrix via local calculations.",

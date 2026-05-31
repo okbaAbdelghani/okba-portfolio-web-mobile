@@ -1,4 +1,4 @@
-// index.js — Dynamic Rendering & Categorization Engine
+// index.js — Dynamic Rendering, Categorization & Live Action Engine
 const projectsContainer = document.querySelector(".projects-grid");
 
 function renderProjects(categoryFilter = "all") {
@@ -16,6 +16,9 @@ function renderProjects(categoryFilter = "all") {
     card.style.opacity = 0;
     card.style.transform = "translateY(24px)";
 
+    // Determine if the root project possesses a live external production link
+    const hasLiveLink = project.link && project.link !== "#";
+
     card.innerHTML = `
       <div class="card-img-wrapper">
         <img src="${project.images[0]}" alt="${project.title}" loading="lazy">
@@ -26,9 +29,18 @@ function renderProjects(categoryFilter = "all") {
         <div class="tech-tags">
           ${project.tech.map(t => `<span>${t}</span>`).join("")}
         </div>
-        <a href="project.html" class="btn" onclick="localStorage.setItem('projectId', '${project.id}')">
-          Explore Architecture <i class="fas fa-arrow-right" style="font-size:0.8rem;"></i>
-        </a>
+        
+        <div class="btn-group" style="display: flex; gap: 12px; width: 100%; margin-top: auto;">
+          <a href="project.html" class="btn btn-details" style="flex: 1; justify-content: center; margin: 0; padding: 12px;" onclick="localStorage.setItem('projectId', '${project.id}')">
+            Architecture <i class="fas fa-arrow-right" style="font-size:0.75rem; margin-left: 4px;"></i>
+          </a>
+          ${hasLiveLink ? `
+            <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="btn btn-visit" style="flex: 1; justify-content: center; margin: 0; padding: 12px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Visit Live
+            </a>
+          ` : ''}
+        </div>
       </div>
     `;
 
