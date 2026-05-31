@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okba Abdelghani | Full-Stack Portfolio</title>
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== MODERN ROOT & VARIABLES ===== */
+  :root {
+    --bg-main: #0a0a12;
+    --bg-surface: rgba(20, 20, 35, 0.65);
+    --bg-surface-hover: rgba(30, 30, 55, 0.85);
+    --primary: #00ffc8;
+    --secondary: #00bfff;
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --card-border: rgba(255, 255, 255, 0.06);
+    --card-border-hover: rgba(0, 255, 200, 0.3);
+    --font-stack: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+  }
+  
+  html, body {
+    font-family: var(--font-stack);
+    scroll-behavior: smooth;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  /* ===== GLOWING BACKDROP EFFECTS ===== */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -10%; left: -10%;
+    width: 50%; height: 50%;
+    background: radial-gradient(circle, rgba(0, 255, 200, 0.08) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -10%; right: -10%;
+    width: 50%; height: 50%;
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.08) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* ===== PREMIUM GLASS NAVIGATION ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    background: rgba(10, 10, 18, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 8%;
+    z-index: 1000;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .logo {
+    font-size: 1.3rem; font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  nav ul { list-style: none; display: flex; gap: 32px; }
+  nav ul li a {
+    color: var(--text-secondary); text-decoration: none;
+    font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease;
+  }
+  nav ul li a:hover { color: var(--primary); }
+
+  /* ===== IMMERSIVE HERO SECTION ===== */
+  header {
+    min-height: 100vh;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    text-align: center; 
+    padding: 0 24px;
+    position: relative;
+  }
+  header h1 {
+    font-size: 4rem; 
+    font-weight: 800;
+    letter-spacing: -2px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #ffffff 40%, var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  header h2 {
+    font-size: 1.6rem; 
+    font-weight: 500;
+    margin-bottom: 40px;
+    color: var(--text-secondary);
+  }
+  
+  .typing {
+    display: inline-block;
+    border-right: 3px solid var(--primary);
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3.5s steps(35, end), blink 0.75s step-end infinite alternate;
+    width: fit-content;
+  }
+  @keyframes typing { from { width: 0; } to { width: 100%; } }
+  @keyframes blink { 50% { border-color: transparent; } }
+
+  /* ===== ACTION CONTROLS ===== */
+  .btn-group {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; z-index: 10;
+  }
+  .btn {
+    padding: 14px 32px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff; 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.95rem; font-weight: 600; border-radius: 50px; 
+    cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn:hover {
+    background: #fff; color: var(--bg-main);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15);
+  }
+  #chat-with-ai-btn {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: var(--bg-main); border: none;
+  }
+  #chat-with-ai-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 255, 200, 0.3);
+    opacity: 0.95;
+  }
+
+  /* ===== CORE SECTION ARCHITECTURE ===== */
+  section {
+    padding: 120px 8%; max-width: 1400px; margin: auto;
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  section.visible { opacity: 1; transform: translateY(0); }
+  
+  .section-header {
+    margin-bottom: 60px; text-align: left;
+  }
+  .section-header h2 {
+    font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px;
+  }
+  .section-header p {
+    color: var(--text-secondary); font-size: 1.05rem;
+  }
+
+  /* ===== ABOUT & SKILLS GRID ===== */
+  .about-grid {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start;
+  }
+  .about-text { 
+    font-size: 1.1rem; line-height: 1.75; color: var(--text-secondary);
+  }
+  .about-text p { margin-bottom: 24px; }
+  
+  .skills-wrapper h3 { font-size: 1.1rem; margin-bottom: 16px; color: #fff; text-transform: uppercase; letter-spacing: 1px;}
+  .skills-container { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skills-container span {
+    background: rgba(255, 255, 255, 0.03); color: #fff;
+    padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 500;
+    border: 1px solid var(--card-border); transition: all 0.3s ease;
+  }
+  .skills-container span:hover {
+    border-color: var(--primary); background: rgba(0, 255, 200, 0.05); color: var(--primary);
+  }
+
+  /* ===== FILTER CHIPS ===== */
+  .filter-group {
+    display: flex; gap: 12px; margin-bottom: 32px; justify-content: flex-start;
+  }
+  .filter-chip {
+    padding: 8px 20px; background: transparent; border: 1px solid var(--card-border);
+    color: var(--text-secondary); font-size: 0.85rem; font-weight: 600; border-radius: 50px;
+    cursor: pointer; transition: all 0.3s ease;
+  }
+  .filter-chip.active, .filter-chip:hover {
+    background: rgba(255, 255, 255, 0.08); border-color: #fff; color: #fff;
+  }
+
+  /* ===== CARDS GRID DISPLAY ===== */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 32px;
+  }
+  .project-card {
+    background: var(--bg-surface); border: 1px solid var(--card-border);
+    border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); height: 100%;
+  }
+  .project-card:hover {
+    transform: translateY(-6px); border-color: var(--card-border-hover);
+    box-shadow: 0 20px 40px rgba(0, 255, 200, 0.05);
+  }
+  .card-img-wrapper { width: 100%; height: 200px; overflow: hidden; background: #141423;}
+  .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; opacity: 0.85;}
+  .project-card:hover img { transform: scale(1.04); opacity: 1; }
+  
+  .card-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
+  .card-content h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: #fff; }
+  .card-content p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
+  
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; margin-top: auto;}
+  .tech-tags span {
+    background: rgba(255,255,255,0.04); color: var(--text-secondary);
+    padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600;
+  }
+  .card-content .btn { width: 100%; justify-content: center; border-radius: 10px; padding: 12px; font-size: 0.9rem;}
+
+  /* ===== ENTERPRISE TIMELINE ===== */
+  .timeline { position: relative; border-left: 2px solid var(--card-border); padding-left: 32px; }
+  .timeline-item { margin-bottom: 48px; position: relative; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -41px; top: 4px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--bg-main); border: 2px solid var(--primary);
+  }
+  .timeline-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .timeline-meta h3 { font-size: 1.4rem; font-weight: 700; color: #fff; }
+  .timeline-meta span { font-size: 0.85rem; font-weight: 600; color: var(--primary); background: rgba(0,255,200,0.05); padding: 4px 12px; border-radius: 50px; }
+  .company-tag { font-size: 1rem; color: var(--text-secondary); margin-bottom: 14px; font-weight: 500; }
+  .timeline-item p { color: var(--text-secondary); line-height: 1.6; font-size: 1rem; }
+
+  /* ===== CONTACT UI ===== */
+  .contact-wrapper { max-width: 600px; margin: auto; background: var(--bg-surface); border: 1px solid var(--card-border); padding: 40px; border-radius: 24px; }
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .contact-form input, .contact-form textarea {
+    padding: 16px; border-radius: 12px; border: 1px solid var(--card-border);
+    background: rgba(0, 0, 0, 0.2); color: #fff; font-family: var(--font-stack); font-size: 0.95rem; transition: all 0.3s ease;
+  }
+  .contact-form input:focus, .contact-form textarea:focus {
+    outline: none; border-color: var(--primary); background: rgba(0, 0, 0, 0.4);
+  }
+  .contact-form button {
+    background: #fff; color: var(--bg-main); border: none; border-radius: 12px; padding: 16px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease;
+  }
+  .contact-form button:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(255,255,255,0.1); }
+
+  /* ===== FOOTER ===== */
+  footer { background: #05050a; padding: 60px 24px; border-top: 1px solid var(--card-border); text-align: center; font-size: 0.9rem; color: var(--text-secondary); }
+  .footer-social { display: flex; gap: 24px; justify-content: center; margin: 24px 0; }
+  .footer-social a { color: var(--text-secondary); text-decoration: none; font-size: 1.2rem; transition: color 0.3s; }
+  .footer-social a:hover { color: var(--primary); }
+
+  /* ===== AMBIENT DECORATIVE FLOATING LOGOS ===== */
+  .floating-tech { position: absolute; width: 100%; height: 100%; top:0; left:0; overflow:hidden; pointer-events:none; z-index: 1;}
+  .floating-tech img { position: absolute; opacity: 0.25; filter: grayscale(30%); transition: all 0.3s ease; }
+  .floating-tech img:hover { opacity: 0.7; filter: grayscale(0%) drop-shadow(0 0 10px var(--primary)); }
+  
+  @keyframes floatAnimation {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(3deg); }
+  }
+  .float { animation: floatAnimation 6s ease-in-out infinite; }
+  .float.slow { animation-duration: 9s; }
+  .float.fast { animation-duration: 4.5s; }
+
+  /* ===== RESPONSIVE MEDIA QUERIES ===== */
+  @media (max-width: 1024px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    header h1 { font-size: 3rem; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 15px 24px; }
+    nav ul { display: none; } /* Add responsive hamburger logic if desired */
+    header h1 { font-size: 2.4rem; }
+    section { padding: 80px 24px; }
+    .contact-wrapper { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">OKBA ABDELGHANI</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header>
+  <div class="floating-tech">
+    <img src="assets/kotlin.png" class="float slow" style="top:15%; left:12%; width:50px;">
+    <img src="assets/angular.png" class="float" style="top:25%; right:14%; width:50px;">
+    <img src="assets/laravel.png" class="float fast" style="bottom:25%; left:15%; width:55px;">
+    <img src="assets/android.png" class="float slow" style="bottom:20%; right:16%; width:55px;">
+  </div>
+
+  <h1>Hi, I'm Okba Abdelghani</h1>
+  <h2><span class="typing">Full-Stack Developer | Web & Mobile</span></h2>
+  
+  <div class="btn-group">
+    <a href="#contact" class="btn">Get In Touch <i class="fas fa-arrow-right"></i></a>
+    <a href="#assistantButton" id="chat-with-ai-btn" class="btn"><i class="fas fa-robot"></i> Chat with My AI</a>
+  </div>
+</header>
+
+<section id="about">
+  <div class="section-header">
+    <h2>About Me</h2>
+    <p>The bridge between scalable system backends and performance-driven user interfaces.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I am a versatile Full-Stack Web & Mobile Developer with over 3 years of hands-on experience building mission-critical architectures. My background ranges from engineering multi-app production Android environments to launching complex, multi-device web deployment software.
+      </p>
+      <p>
+        Specializing in the automation of massive white-label applications for international tech markets and real-time data orchestration architectures for live major event management, I write clean, resilient, modular components across both client and server domains.
+      </p>
+    </div>
+    <div class="skills-wrapper">
+      <h3>Core Stack Engine</h3>
+      <div class="skills-container">
+        <span>Kotlin</span><span>Flutter & Dart</span><span>Jetpack Compose</span><span>Angular</span><span>React</span><span>Laravel</span><span>PHP</span><span>TypeScript</span><span>REST APIs</span><span>JWT Authentication</span><span>ContentProvider</span><span>MySQL</span><span>SQLite</span><span>Firebase</span><span>Git / DevOps</span><span>Google Play Console</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-header">
+    <h2>Selected Projects</h2>
+    <p>A showcase of enterprise solutions and production-grade software engines.</p>
+  </div>
+  
+  <div class="filter-group">
+    <button class="filter-chip active" onclick="filterProjects('all', this)">All Engines</button>
+    <button class="filter-chip" onclick="filterProjects('web', this)">Web Architectures</button>
+    <button class="filter-chip" onclick="filterProjects('mobile', this)">Mobile Ecosystems</button>
+  </div>
+
+  <div class="projects-grid">
+    <!-- Dynamic insertion occurs here -->
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-header">
+    <h2>Professional Lifecycles</h2>
+    <p>Engineering journey across production operations and international development.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-meta">
+        <h3>Développeur Web & Mobile Full-Stack</h3>
+        <span>Juin 2025 – Présent</span>
+      </div>
+      <div class="company-tag">Ask Me Digital Maroc — Casablanca</div>
+      <p>
+        Architecting cross-platform Flutter and native multi-device apps for smart installations and major festivals like Jazzablanca. Managed local edge server environments handling instant processing loops, custom administration pipelines, and real-time transactional reward programs with streaming output systems.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-meta">
+        <h3>Développeur Web & Mobile Full-Stack</h3>
+        <span>Oct. 2022 – Mai 2025</span>
+      </div>
+      <div class="company-tag">Zaytech Software — Mohammedia (North American Market)</div>
+      <p>
+        Engineered and managed over 120 live white-label retail deployments across the US and Canadian business sectors using complex product flavors codebases. Built localized native Android POS database sync frameworks alongside custom web dashboard interfaces backed by Angular, Laravel, and asynchronous API architectures.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-header" style="text-align: center;">
+    <h2>Initiate Connection</h2>
+    <p>Have an enterprise platform or an innovative application stack to build?</p>
+  </div>
+  <div class="contact-wrapper">
+    <form id="contactForm" class="contact-form">
+      <input id="name" type="text" placeholder="Your Professional Identity" required>
+      <input id="email" type="email" placeholder="Your Email Address" required>
+      <textarea id="message" rows="5" placeholder="Project details, parameters, or consultation topics..." required></textarea>
+      <button type="submit">Transmit Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-social">
+    <a href="https://www.linkedin.com/in/abdelghani-okba-pro/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/okbaAbdelghani" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.youtube.com/@okbaabdelghani6225" target="_blank"><i class="fab fa-youtube"></i></a>
+  </div>
+  <p>&copy; 2026 Okba Abdelghani | Engineered for High Performance.</p>
+</footer>
+
+<script>
+  // Simple view-in trigger animation
+  const sections = document.querySelectorAll("section");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
+    });
+  }, { threshold: 0.1 });
+  sections.forEach(sec => observer.observe(sec));
+</script>
+<script src="projects.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
